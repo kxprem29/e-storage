@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Out</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
+</head>
+<body class="bg-gray-100 dark:bg-gray-800 h-screen flex items-center justify-center">
+
+    <div class="w-96 bg-white dark:bg-gray-900 p-6 rounded-lg shadow-md text-center">
+        <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Sign Out</h2>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Are you sure you want to sign out?</p>
+
+        <form action="/user/signout" method="post" class="mt-4">
+            <button type="submit" 
+                class="w-full text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-red-500">
+                Yes, Sign Out
+            </button>
+        </form>
+
+        <a href="/user/home" 
+            class="inline-block mt-3 text-blue-600 dark:text-blue-400 hover:underline text-sm">
+            Cancel
+        </a>
+    </div>
+
+</body>
+</html>

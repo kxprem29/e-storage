@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+    rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css"  rel="stylesheet" />
+</head>
+<body>
+  <main class="p-6 bg-gray-100 dark:bg-gray-800 h-screen w-screen flex flex-col justify-center items-center">
+    
+    <!-- Profile Icon (Top Right) -->
+    <div class="absolute top-4 right-6">
+      <a href="/user/profile" class="text-gray-700 dark:text-gray-300 text-2xl hover:text-blue-500">
+        <i class="ri-user-settings-line"></i>
+      </a>
+    </div>
+
+    <!-- Page Heading -->
+    <h1 class="text-2xl font-bold text-gray-800 dark:text-gray-200 mb-4">Upload a File</h1>
+
+    <!-- Upload Form -->
+    <form action="/user/upload" method="post" enctype="multipart/form-data" class="w-96 p-6 bg-white dark:bg-gray-700 rounded-lg shadow-md">
+      
+      <!-- Drag & Drop File Input -->
+      <div class="flex items-center justify-center w-full">
+        <label for="file-input" class="flex flex-col items-center justify-center w-full h-40 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+          <div class="flex flex-col items-center justify-center pt-5 pb-6">
+            <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
+            </svg>
+            <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
+            <p class="text-xs text-gray-500 dark:text-gray-400">Supported formats: PNG, JPG, PDF</p>
+          </div>
+          <input id="file-input" type="file" name="file" class="hidden" required />
+        </label>
+      </div>
+      <p id="file-name" class="text-sm text-gray-600 dark:text-gray-300 mt-2 text-center"></p>
+
+
+      <!-- Submit Button -->
+      <button type="submit" class="w-full mt-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 rounded">
+        Upload File
+      </button>
+    </form>
+
+    <!-- Back to Dashboard Button -->
+    <a href="/user/home" class="mt-4 text-blue-500 hover:underline">
+      ← Back to Dashboard
+    </a>
+
+  </main>
+  <script>
+    const fileInput = document.getElementById('file-input');
+    const fileNameDisplay = document.getElementById('file-name');
+  
+    fileInput.addEventListener('change', function () {
+      if (fileInput.files.length > 0) {
+        fileNameDisplay.textContent = `Selected: ${fileInput.files[0].name}`;
+      } else {
+        fileNameDisplay.textContent = '';
+      }
+    });
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
+</body>
+</html>
