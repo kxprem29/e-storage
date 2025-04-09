@@ -24,9 +24,7 @@ mongoose.connect(process.env.MONGODB_URI).then(()=>{
 app.use('/user', userRouter)
 
 app.get('/',(req,res)=>{
-    res.json({
-        message:"hello from server"
-    })
+    res.redirect('/user')
 })
 
 app.listen(process.env.PORT,()=>{
