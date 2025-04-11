@@ -34,11 +34,12 @@ exports.signup = async (req, res) => {
 		});
 		const result = await newUser.save();
 		result.password = undefined;
-		res.status(201).json({
-			success: true,
-			message: 'Your account has been created successfully',
-			result,
-		});
+		res.redirect('/user/signin');
+		// res.status(201).json({
+		// 	success: true,
+		// 	message: 'Your account has been created successfully',
+		// 	result,
+		// });
 	} catch (error) {
 		console.log(error);
 	}
