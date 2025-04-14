@@ -34,7 +34,9 @@ exports.signup = async (req, res) => {
 		});
 		const result = await newUser.save();
 		result.password = undefined;
-		res.redirect('/user/sendCode');
+		res.render('signupSuccess')
+		// res.redirect('/user/signupSuccess');
+		// res.redirect('/user/sendCode');
 		// res.status(201).json({
 		// 	success: true,
 		// 	message: 'Your account has been created successfully',
@@ -65,7 +67,8 @@ exports.signin=async (req,res)=>{
           return res.status(401).json({success:false,message:"invalid credentials"})
        }
 	   if(existingUser.verified==false){
-		res.redirect('/user/sendCode')
+		// res.redirect('/user/signupSuccess')
+		res.render('verificationPending')
 	   }
        const token=jwt.sign({
         userId:existingUser._id,
@@ -140,7 +143,7 @@ exports.sendVerificationCode= async (req,res)=>{
         let info=await transport.sendMail({
             from: process.env.NODE_CODE_SENDING_EMAIL_ADDRESS,
             to: existingUser.email,
-            subject:"Verification COde",
+            subject:"Verification Code",
             html:'<h1>'+codeValue+'</h1>'
         })
         if(info.accepted[0]===existingUser.email){
@@ -210,8 +213,8 @@ exports.verifyVerificationCode = async (req, res) => {
 			existingUser.verificationCode = undefined;
 			existingUser.verificationCodeValidation = undefined;
 			await existingUser.save();
-			
-			res.redirect('/user/signin')
+			res.render('verificationSuccess')
+			// res.redirect('/user/verificationSuccess')
 			// res
 			// 	.status(200)
 			// 	.json({ success: true, message: 'your account has been verified!' });

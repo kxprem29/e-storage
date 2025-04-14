@@ -13,12 +13,17 @@ router.get('/',(req,res)=>{
     // res.send('user route');
 })
 router.get('/test',(req,res)=>{
+    res.render('signupSuccess');
     res.send('user test route');
 })
 router.get('/signup',(req,res)=>{
     res.render('signup')
 })
 router.post('/signup',userController.signup)
+
+router.get('/signupSuccess',(req,res)=>{
+    res.render('signupSuccess');
+})
 router.get('/sendCode',(req,res)=>{
     res.render('sendCode');
 })
@@ -28,6 +33,9 @@ router.get('/verifyCode',(req,res)=>{
     res.render('verifyCode');
 })
 router.post('/verifyCode',userController.verifyVerificationCode);
+// router.get('/verificationSuccess',(req,res)=>{
+//     res.render('verificationSuccess');
+// })
 
 router.get('/signin',(req,res)=>{
     res.render('signin')
