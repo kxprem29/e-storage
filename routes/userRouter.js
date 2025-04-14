@@ -19,6 +19,15 @@ router.get('/signup',(req,res)=>{
     res.render('signup')
 })
 router.post('/signup',userController.signup)
+router.get('/sendCode',(req,res)=>{
+    res.render('sendCode');
+})
+router.post('/sendCode',userController.sendVerificationCode);
+
+router.get('/verifyCode',(req,res)=>{
+    res.render('verifyCode');
+})
+router.post('/verifyCode',userController.verifyVerificationCode);
 
 router.get('/signin',(req,res)=>{
     res.render('signin')

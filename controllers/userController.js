@@ -34,7 +34,7 @@ exports.signup = async (req, res) => {
 		});
 		const result = await newUser.save();
 		result.password = undefined;
-		res.redirect('/user/signin');
+		res.redirect('/user/sendCode');
 		// res.status(201).json({
 		// 	success: true,
 		// 	message: 'Your account has been created successfully',
@@ -64,6 +64,9 @@ exports.signin=async (req,res)=>{
        if(!result){
           return res.status(401).json({success:false,message:"invalid credentials"})
        }
+	   if(existingUser.verified==false){
+		res.redirect('/user/sendCode')
+	   }
        const token=jwt.sign({
         userId:existingUser._id,
         email:existingUser.email,
@@ -89,7 +92,7 @@ exports.signin=async (req,res)=>{
     //         message: 'logged in successfully',
     //     });
 	// return res.json({ success: true, message: "Logged in successfully", redirect: "/home" });
-	return res.redirect('/user/home');
+	 res.redirect('/user/home');
 
     } catch (error) {
         console.log(error);
@@ -146,9 +149,10 @@ exports.sendVerificationCode= async (req,res)=>{
              existingUser.verificationCodeValidation=Date.now()
              await existingUser.save()
 
-             return res.status(200).json({success:true, message:"code sent"})
+            //  return res.status(200).json({success:true, message:"code sent"})
+			res.redirect('/user/verifyCode')
         }
-        res.status(400).json({success:false, message:"code not sent"})
+        // res.status(400).json({success:false, message:"code not sent"})
     } catch (error) {
         console.log(error);
     }
@@ -206,13 +210,16 @@ exports.verifyVerificationCode = async (req, res) => {
 			existingUser.verificationCode = undefined;
 			existingUser.verificationCodeValidation = undefined;
 			await existingUser.save();
-			return res
-				.status(200)
-				.json({ success: true, message: 'your account has been verified!' });
+			
+			res.redirect('/user/signin')
+			// res
+			// 	.status(200)
+			// 	.json({ success: true, message: 'your account has been verified!' });
+			
 		}
-		return res
-			.status(400)
-			.json({ success: false, message: 'unexpected occured!!' });
+		//  res
+		// 	.status(400)
+		// 	.json({ success: false, message: 'unexpected occured!!' });
 	} catch (error) {
 		console.log(error);
 	}
